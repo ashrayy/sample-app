@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+import "fmt" // stands for format offers Printf and Println
 
 const tempConst = 100
 
@@ -17,12 +17,12 @@ func main() {
 	fmt.Println(stringWithoutType)
 	fmt.Printf("Variable Type for string Without Type -> %T\n", stringWithoutType)
     
-	// works only inside function
+	// NOTE - works only inside function
 	newString:= "This is String 3"
 	fmt.Println(newString)
 	fmt.Printf("Variable Type for string With Colon -> %T\n", newString)
 
-	// accessing global variables
+	// NOTE - accessing global variables
 	fmt.Println(tempConst)
 	fmt.Printf("Variable Type for declared constant -> %T\n", tempConst)
 
