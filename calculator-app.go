@@ -61,10 +61,6 @@ func main() {
 	default:
 		fmt.Println("Invalid Choice")
 	}
-
 		
 	fmt.Printf("By Performing %v operation on %v and %v result is %v", operation, n1, n2, result)
-	
-	// sum := n1+n2
-	// fmt.Printf("Sum of number1 is %v , number2 is %v and sum-> %v\n", n1, n2, math.Round(sum))
 }
