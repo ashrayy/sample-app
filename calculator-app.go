@@ -3,30 +3,27 @@ package main
 import (
 	"fmt"
 	"os"
-	// "math"
 	"bufio"
 	"strconv"
 	"strings"
 )
 
-func main() {
-    fmt.Println("#### Calculator App #####")
+func getInputValue() (float64){
 	reader := bufio.NewReader(os.Stdin)
-
-	fmt.Println("Enter number 1")
+	fmt.Println("Enter number")
 	input1,_ := reader.ReadString('\n')
 	n1,err1 := strconv.ParseFloat(strings.TrimSpace(input1), 64)
 	if err1 != nil {
-		panic("Invalid value in input1")
-	} 
+		panic("Invalid value in input")
+	}
+	return n1
+}
 
-	fmt.Println("Enter number 2")
-	input2,_ := reader.ReadString('\n')
-	n2,err2 := strconv.ParseFloat(strings.TrimSpace(input2), 64)
-	if err2 != nil {
-		panic("Invalid value in input2")
-	} 
-
+func main() {
+    fmt.Println("#### Calculator App #####")
+    reader := bufio.NewReader(os.Stdin)
+	n1 := getInputValue()
+	n2 := getInputValue()
 	fmt.Println("Enter your choice")
 	fmt.Println("Press 1 for Addition")
 	fmt.Println("Press 2 for Substraction")
