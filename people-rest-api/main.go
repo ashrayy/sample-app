@@ -26,7 +26,7 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 	response.Header().Set("content-type", "application/json")
 	var person Person
 	_ = json.NewDecoder(request.Body).Decode(&person)
-	collection := client.Database("thepolyglotdeveloper").Collection("people")
+	collection := client.Database("peopledb").Collection("people")
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	result, _ := collection.InsertOne(ctx, person)
 	json.NewEncoder(response).Encode(result)
@@ -38,7 +38,7 @@ func GetPersonEndpoint(response http.ResponseWriter, request *http.Request) {
 	params := mux.Vars(request)
 	id, _ := primitive.ObjectIDFromHex(params["id"])
 	var person Person
-	collection := client.Database("thepolyglotdeveloper").Collection("people")
+	collection := client.Database("peopledb").Collection("people")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	err := collection.FindOne(ctx, Person{ID: id}).Decode(&person)
 	if err != nil {
@@ -54,7 +54,7 @@ func GetPersonEndpoint(response http.ResponseWriter, request *http.Request) {
 func GetPeopleEndpoint(response http.ResponseWriter, request *http.Request) {
 	response.Header().Set("content-type", "application/json")
 	var people []Person
-	collection := client.Database("thepolyglotdeveloper").Collection("people")
+	collection := client.Database("peopledb").Collection("people")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
@@ -79,7 +79,7 @@ func GetPeopleEndpoint(response http.ResponseWriter, request *http.Request) {
 func main() {
 	fmt.Println("Starting the application...")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	clientOptions := options.Client().ApplyURI("mongodb+srv://admin:admin@cluster0.ak3cdsb.mongodb.net/?retryWrites=true&w=majority")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://admin:admin@cluster0.mlfbzbp.mongodb.net/?retryWrites=true&w=majority")
 	client, _ = mongo.Connect(ctx, clientOptions)
 	router := mux.NewRouter()
 	router.HandleFunc("/person", CreatePersonEndpoint).Methods("POST")
